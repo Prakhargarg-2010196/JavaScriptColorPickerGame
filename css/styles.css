@@ -45,13 +45,11 @@ a {
 #color-palette-grid-container {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
-  /* flex-direction: column; */
+  
   background: black;
   height: 76vh;
 }
 #color-palette-grid-container > .color-palette-grid {
-  /* grid using grid */
   display: grid;
   margin: 12px 0;
   grid-template-columns: repeat(3, 2fr);
@@ -59,17 +57,11 @@ a {
   grid-column-gap: 12px;
   grid-row-gap: 12px;
   width: 50%;
-  /* grid using flexbox */
-  /* display: flex;
-  gap:12px;
-  margin:12px 0; */
+ 
 }
 .color-palette-grid > .color-box-one {
   background-color: aquamarine;
   border-radius: 12px;
-  width: 20%;
-  height: 20%;
-  padding: 100px;
 }
 
 @media (max-width: 884px) {

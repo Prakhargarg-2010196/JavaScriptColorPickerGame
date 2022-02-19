@@ -67,8 +67,6 @@ const getColor = () => {
     let bgColor = cssObject.backgroundColor;
     arrayOfColors.push(bgColor);
   }
-  console.log(arrayOfColors);
-  console.log(length);
   const randomColorPosition = Math.floor(Math.random() * length);
   return arrayOfColors[randomColorPosition];
 };
