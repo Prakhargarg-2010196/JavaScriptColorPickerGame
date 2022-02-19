@@ -45,7 +45,6 @@ a {
 #color-palette-grid-container {
   display: flex;
   justify-content: center;
-  
   background: black;
   height: 76vh;
 }
