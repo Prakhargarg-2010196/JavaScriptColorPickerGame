@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
 }
+
 a {
   text-decoration: none;
   color: brown;
@@ -56,16 +57,29 @@ a {
   grid-column-gap: 12px;
   grid-row-gap: 12px;
   width: 50%;
- 
 }
 .color-palette-grid > .color-box-one {
   background-color: aquamarine;
   border-radius: 12px;
+  box-shadow: 0px -2px 24px 8px #575454;
 }
-
+.message {
+  margin-left: 50px;
+}
 @media (max-width: 884px) {
   #color-palette-grid-container > .color-palette-grid {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(6, 3fr);
   }
+}
+
+@keyframes fadeIn {
+  to{
+    opacity:0;
+  }
+  
+}
+.fade-in {
+  opacity: 1;
+  animation: fadeIn 1s ease-in 1 forwards;
 }
