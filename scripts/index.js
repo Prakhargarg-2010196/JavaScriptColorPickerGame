@@ -1,5 +1,5 @@
 // This function is used to generate a random color
-
+var key="easy";
 const RandomColorGenerator = () => {
   const randomColorOne = Math.floor(Math.random() * 255);
   const randomColorTwo = Math.floor(Math.random() * 255);
@@ -8,21 +8,22 @@ const RandomColorGenerator = () => {
   return combinedRandomColor;
 };
 const grid = document.querySelector(".color-palette-grid");
+const newColors = document.querySelector(".new-color");
 const gridItems = grid.children;
-const statusDiv = document.querySelector("#status");
+const colorGameDiv = document.querySelector("#color-game-header");
 const messageNode = document.querySelector(".message");
 const SendMessage = (message) => {
   return message;
 };
-
+const header=document.querySelector("#color-game-header");
 const removeAllBoxes = () => {
   while (grid.firstChild) grid.removeChild(grid.firstChild);
 };
-const addABox = () => {
+const addABox = (colorBoxBgColor=`${RandomColorGenerator()}`) => {
   const colorBox = document.createElement("div");
   colorBoxElement = grid.appendChild(colorBox);
   colorBoxElement.classList.add("color-box-one");
-  colorBox.style.background = `${RandomColorGenerator()}`;
+  colorBox.style.background = colorBoxBgColor;
 };
 const HandleClick = () => {
   let arrayGrid = [];
@@ -30,16 +31,32 @@ const HandleClick = () => {
   arrayGrid.forEach((ele) => {
     ele.addEventListener("click", () => {
       if (WinDecide(ele)) {
+        
         messageNode.textContent = SendMessage("You won");
+        const eleColor=ele.style.backgroundColor;
+        colorGameDiv.setAttribute("style",`background-color:${eleColor}`);
+        if(window.key==="easy")
+        { removeAllBoxes();
+          for(let i=0;i<3;i++)
+          {
+            addABox(eleColor);
+          }
+        }
+        else if(window.key==="hard")
+        {
+          removeAllBoxes();
+          for(let i=0;i<6;i++)
+          {
+            addABox(eleColor);
+          }
+        }
         setTimeout(() => {
           messageNode.textContent = "";
         }, 2000);
       } else if (!WinDecide(ele)) {
-        ele.classList.add("fade-in")
-        // ele.remove();
-        arrayGrid.length = arrayGrid.length - 1;
-        console.log(arrayGrid);
-        messageNode.textContent = SendMessage("Sorry Try Again");
+        ele.classList.add("fade-in");
+        
+        messageNode.textContent = SendMessage("try again");
         setTimeout(() => {
           messageNode.textContent = "";
         }, 2000);
@@ -56,31 +73,32 @@ const setGrid = () => {
   
   for (let i = 0; i < levels.length; i++) {
     let key = levels[i].name;
-
+    
     levels[i].addEventListener("click", () => {
       switch (key) {
         case "easy":
-          {
+          { 
+            window.key=key;
             removeAllBoxes();
             for (let i = 0; i < 3; i++) {
               addABox();
             }
 
             gameColor.textContent = getColor();
-            HandleClick();
-            return key;
+            HandleClick(); 
+           
             
           }
           break;
-        case "hard":
-          {
+          case "hard":
+          { window.key=key;
             removeAllBoxes();
             for (let i = 0; i < 6; i++) addABox();
             gameColor.textContent = getColor();
             HandleClick();
-            return key;
           }
           break;
+        
           
       }
     });
@@ -104,11 +122,9 @@ const WinDecide = (item) => {
   if (bgColor === winColor) return true;
   else if (bgColor !== winColor) return false;
 };
-const newColors = document.querySelector(".new-color");
 
 const gameColor = document.querySelector(".text-node-two");
 gameColor.textContent = getColor();
-console.log(setGrid)
 newColors.addEventListener("click", () => {
   if (gridItems.length === 6 || gridItems.length === 3)
     for (let i = 0; i < gridItems.length; i++) {
